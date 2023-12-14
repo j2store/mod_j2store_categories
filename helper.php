@@ -2,13 +2,14 @@
 /**
  * @package     Joomla.Site
  * @subpackage  mod_j2store_categories
- *
- * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
+ * @author      Gopi
+ * @copyright   Copyright (C) 2023 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
-require_once JPATH_SITE . '/components/com_content/helpers/route.php';
-
+if (version_compare(JVERSION, '3.99.99', 'lt')) {
+    require_once JPATH_SITE . '/components/com_content/helpers/route.php';
+}
 /**
  * Helper for mod_j2store_categories
  *
@@ -158,10 +159,10 @@ class ModJ2storeCategoriesHelper
      */
     public static function getParams($params)
     {
+        $platform=J2Store::platform();
         if (!($params instanceof JRegistry))
         {
-            $temp = new JRegistry;
-            $temp->loadString($params);
+            $temp = $platform->getRegistry($params);
             $params = $temp;
         }
         return $params;

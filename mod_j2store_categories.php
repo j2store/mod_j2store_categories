@@ -2,8 +2,8 @@
 /**
  * @package     Joomla.Site
  * @subpackage  mod_j2store_categories
- *
- * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
+ * @author      Gopi
+ * @copyright   Copyright (C) 2023 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -15,5 +15,6 @@ $list = ModJ2storeCategoriesHelper::getList($params);
 
 if (!empty($list))
 {
+
     require JModuleHelper::getLayoutPath('mod_j2store_categories', $params->get('layout', 'default'));
 }

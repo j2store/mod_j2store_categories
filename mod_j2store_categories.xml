@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.2" client="site" method="upgrade">
 	<name>J2Store Categories</name>
-	<author>Gokila Priya</author>
-	<creationDate>AUG 2018</creationDate>
-	<copyright>Copyright (C) 2016 ThemeParrot. All rights reserved.</copyright>
+	<author>Gopi</author>
+	<creationDate>DEC 2023</creationDate>
+	<copyright>Copyright (C) 2023 ThemeParrot. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>support@themeparrot.com</authorEmail>
 	<authorUrl>www.themeparrot.com</authorUrl>
-	<version>1.7</version>
+	<version>4.0.0</version>
 	<description>MOD_J2STORE_CATEGORIES_XML_DESCRIPTION</description>
+	<scriptfile>script.mod_j2store_categories.php</scriptfile>
 	<files>
 		<filename module="mod_j2store_categories">mod_j2store_categories.php</filename>
 		<folder>elements</folder>
 		<folder>languages</folder>
-		<folder>tmpl</folder>		
+		<folder>tmpl</folder>
 		<filename>helper.php</filename>
 		<filename>index.html</filename>
 		<filename>mod_j2store_categories.xml</filename>
 	</files>
+	<updateservers>
+		<server type="extension" priority="2" name="J2Store Categories">
+			https://cdn.j2store.net/plugins/module/mod_j2store_categories.xml
+		</server>
+	</updateservers>
 	<languages>
 		<language tag="en-GB">languages/en-GB.mod_j2store_categories.ini</language>
 		<language tag="en-GB">languages/en-GB.mod_j2store_categories.sys.ini</language>
@@ -26,12 +32,12 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic" addfieldpath="modules/mod_j2store_categories/elements/">
-				
+				<field name="is_free" type="hidden" default="true" />
 				<field name="menuitem_id" type="j2storemenuitem"
 					 label="MOD_J2STORE_FIELD_SETITEMID_LABEL" description="MOD_J2STORE_FIELD_SETITEMID_LABEL_DESC" default="0" >
 					<option value="0">J2STORE_SELECT_OPTION</option>
 				</field>
-					
+
 				<field
 					name="parent"
 					type="category"
@@ -39,7 +45,7 @@
 					published=""
 					label="MOD_J2STORE_CATEGORIES_FIELD_PARENT_LABEL"
 					description="MOD_J2STORE_CATEGORIES_FIELD_PARENT_DESC"/>
-	
+
 				<field
 					name="show_description"
 					type="radio"
@@ -50,7 +56,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-	
+
 				<field
 					name="numitems"
 					type="radio"
@@ -61,7 +67,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				
+
 				<field
 					name="browse_link"
 					type="radio"
@@ -72,7 +78,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-	
+
 				<field
 					name="show_children"
 					type="radio"
@@ -127,7 +133,7 @@
 					<option value="9">J9</option>
 					<option value="10">J10</option>
 				</field>
-				
+
 				<field name="show_image" type="radio" default="1" class="btn-group" label="COM_J2STORE_CATEGORIES_FIELD_SHOW_IMAGE_LABEL"	description="COM_J2STORE_CATEGORIES_FIELD_SHOW_IMAGE_DESC">
 					<option value="1">J2STORE_SHOW</option>
 					<option value="0">J2STORE_HIDE</option>
@@ -146,14 +152,14 @@
 						label="MOD_J2STORE_CATEGORIES_FIELD_IMAGE_WIDTH"
 						description="MOD_J2STORE_CATEGORIES_FIELD_IMAGE_WIDTH_DESC" />
 			</fieldset>
-	
+
 			<fieldset name="advanced">
 				<field
 					name="layout"
 					type="modulelayout"
 					label="JFIELD_ALT_LAYOUT_LABEL"
 					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
-	
+
 				<field
 					name="item_heading"
 					type="list"
@@ -167,14 +173,14 @@
 					<option value="4">JH4</option>
 					<option value="5">JH5</option>
 				</field>
-	
+
 				<field
 					name="moduleclass_sfx"
 					type="textarea"
 					rows="3"
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
-	
+
 				<field
 					name="owncache"
 					type="list"
@@ -185,7 +191,7 @@
 					<option value="1">JGLOBAL_USE_GLOBAL</option>
 					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
-	
+
 				<field
 					name="cache_time"
 					type="text"

@@ -1,19 +1,20 @@
 <?php
-/*------------------------------------------------------------------------
-# mod_j2store_categories
-# ------------------------------------------------------------------------
-# author    Gokila priya - Weblogicx India http://www.weblogicxindia.com
-# copyright Copyright (C) 2014 - 19 Weblogicxindia.com. All Rights Reserved.
-# @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
-# Websites: http://j2store.org
-# Technical Support:  Forum - http://j2store.org/forum/index.html
--------------------------------------------------------------------------*/
+/**
+ * @package     Joomla.Site
+ * @subpackage  mod_j2store_categories
+ * @author      Gopi
+ * @copyright   Copyright (C) 2023 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-$app = JFactory::getApplication();
+use Joomla\CMS\Router\Route;
+$platform=J2Store::platform();
+$app = $platform->application();
 $active_id = $app->input->getInt('filter_catid', '');
 $category_display_view = $params->get('category_display_view', 'list_view');
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
+
 if ($category_display_view === "grid_view") {
     $categories_per_row = $params->get('categories_per_row', '4');
     $col = round(12 / $categories_per_row);
@@ -27,9 +28,9 @@ if ($category_display_view === "grid_view") {
             <?php
         }
         ?>
-        <div class="<?php echo $column_class; if ($_SERVER['PHP_SELF'] == JRoute::_(ContentHelperRoute::getCategoryRoute($item->id))) echo ' active'; ?>">
+        <div class="<?php echo $column_class; if ($_SERVER['PHP_SELF'] ==  Route::_(ContentHelperRoute::getArticleRoute($item->id))) echo ' active'; ?>">
             <?php
-            $image = $item->getParams->get('image');
+            $image = J2Store::platform()->getImagePath($item->getParams->get('image'));
             $image_alt = $item->getParams->get('image_alt');
             $active = ($active_id == $item->id) ? 'active' : '';
             $image_height = $params->get('image_height', 40);
@@ -37,13 +38,13 @@ if ($category_display_view === "grid_view") {
             $itemid = isset($item->menu_id) ? $item->menu_id : $params->get('menuitem_id', '');
             if ($params->get('show_image', 0) && $image != '') {
                 ?>
-                <a href="<?php echo JRoute::_('index.php?option=com_j2store&view=products&j2storesource=category&task=browse&filter_catid=' . $item->id . '&Itemid=' . $itemid); ?>">
-                    <img src="<?php echo JUri::root() . $image; ?>" width="<?php echo $image_width; ?>"
+                <a href="<?php echo $platform->getProductUrl(array('j2storesource'=>'category','task'=>'browse','filter_catid'=>$item->id,'Itemid'=>$itemid)); ?>">
+                    <img src="<?php echo $image; ?>" width="<?php echo $image_width; ?>"
                          height="<?php echo $image_height; ?>" border="0" alt="<?php echo $image_alt; ?>"/>
                 </a>
             <?php } ?>
             <h<?php echo $params->get('item_heading'); ?>>
-                <a href="<?php echo JRoute::_('index.php?option=com_j2store&view=products&j2storesource=category&task=browse&filter_catid=' . $item->id . '&Itemid=' . $itemid); ?>">
+                <a href="<?php echo $platform->getProductUrl(array('j2storesource'=>'category','task'=>'browse','filter_catid'=>$item->id,'Itemid'=>$itemid)); ?>">
                     <?php echo $item->title; ?>
                     <?php if ($params->get('numitems')) : ?>
                         (<?php echo $item->numitems; ?>)
@@ -55,7 +56,7 @@ if ($category_display_view === "grid_view") {
             <?php } ?>
 
             <?php if ($params->get('browse_link', 1)) { ?>
-                <a href="<?php echo JRoute::_('index.php?option=com_j2store&view=products&j2storesource=category&task=browse&filter_catid=' . $item->id . '&Itemid=' . $itemid); ?>">
+                <a href="<?php echo $platform->getProductUrl(array('j2storesource'=>'category','task'=>'browse','filter_catid'=>$item->id,'Itemid'=>$itemid)); ?>">
                     <?php echo JText::_('J2STORE_BROWSE_PRODUCTS'); ?>
                 </a>
             <?php }; ?>
@@ -75,9 +76,9 @@ if ($category_display_view === "grid_view") {
         <?php
         foreach ($list as $item) {
             ?>
-            <li class="<?php if ($_SERVER['PHP_SELF'] == JRoute::_(ContentHelperRoute::getCategoryRoute($item->id))) echo 'active'; ?>">
+            <li class="<?php if ($_SERVER['PHP_SELF'] ==  Route::_(ContentHelperRoute::getArticleRoute($item->id))) echo 'active'; ?>">
                 <?php
-                $image = $item->getParams->get('image');
+                $image = J2Store::platform()->getImagePath($item->getParams->get('image'));
                 $image_alt = $item->getParams->get('image_alt');
                 $active = ($active_id == $item->id) ? 'active' : '';
                 $image_height = $params->get('image_height', 40);
@@ -85,13 +86,13 @@ if ($category_display_view === "grid_view") {
                 $itemid = isset($item->menu_id) ? $item->menu_id : $params->get('menuitem_id', '');
                 if ($params->get('show_image', 0) && $image != '') {
                     ?>
-                    <a href="<?php echo JRoute::_('index.php?option=com_j2store&view=products&j2storesource=category&task=browse&filter_catid=' . $item->id . '&Itemid=' . $itemid); ?>">
-                        <img src="<?php echo JUri::root() . $image; ?>" width="<?php echo $image_width; ?>"
+                    <a href="<?php echo $platform->getProductUrl(array('j2storesource'=>'category','task'=>'browse','filter_catid'=>$item->id,'Itemid'=>$itemid)); ?>">
+                        <img src="<?php echo $image; ?>" width="<?php echo $image_width; ?>"
                              height="<?php echo $image_height; ?>" border="0" alt="<?php echo $image_alt; ?>"/>
                     </a>
                 <?php } ?>
                 <h<?php echo $params->get('item_heading'); ?>>
-                    <a href="<?php echo JRoute::_('index.php?option=com_j2store&view=products&j2storesource=category&task=browse&filter_catid=' . $item->id . '&Itemid=' . $itemid); ?>">
+                    <a href="<?php echo $platform->getProductUrl(array('j2storesource'=>'category','task'=>'browse','filter_catid'=>$item->id,'Itemid'=>$itemid)); ?>">
                         <?php echo $item->title; ?>
                         <?php if ($params->get('numitems')) : ?>
                             (<?php echo $item->numitems; ?>)
@@ -103,7 +104,7 @@ if ($category_display_view === "grid_view") {
                 <?php } ?>
 
                 <?php if ($params->get('browse_link', 1)) { ?>
-                    <a href="<?php echo JRoute::_('index.php?option=com_j2store&view=products&j2storesource=category&task=browse&filter_catid=' . $item->id . '&Itemid=' . $itemid); ?>">
+                    <a href="<?php echo $platform->getProductUrl(array('j2storesource'=>'category','task'=>'browse','filter_catid'=>$item->id,'Itemid'=>$itemid)); ?>">
                         <?php echo JText::_('J2STORE_BROWSE_PRODUCTS'); ?>
                     </a>
                 <?php };

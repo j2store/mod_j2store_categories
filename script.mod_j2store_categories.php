@@ -23,8 +23,8 @@ class Mod_j2store_categoriesInstallerScript {
         if (\Joomla\CMS\Filesystem\File::exists ( $version_file )) {
             require_once($version_file);
             // abort if the current J2Store release is older
-            if (version_compare(J2STORE_VERSION, '4.0.3', 'lt')) {
-                $app->enqueueMessage( 'You are using an old version of J2Store. Please upgrade to the latest version 4.0.3');
+            if (version_compare(J2STORE_VERSION, '4.0.4', 'lt')) {
+                $app->enqueueMessage( 'You are using an old version of J2Store. Please upgrade to the latest version 4.0.4');
                 return false;
             }
         } else {

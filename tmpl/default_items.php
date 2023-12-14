@@ -8,7 +8,6 @@
  */
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-use Joomla\CMS\Router\Route;
 $platform=J2Store::platform();
 $app = $platform->application();
 $active_id = $app->input->getInt('filter_catid', '');
@@ -28,7 +27,7 @@ if ($category_display_view === "grid_view") {
             <?php
         }
         ?>
-        <div class="<?php echo $column_class; if ($_SERVER['PHP_SELF'] ==  Route::_(ContentHelperRoute::getArticleRoute($item->id))) echo ' active'; ?>">
+        <div class="<?php echo $column_class; if ($_SERVER['PHP_SELF'] ==  Joomla\CMS\Router\Route::_(ContentHelperRoute::getArticleRoute($item->id))) echo ' active'; ?>">
             <?php
             $image = J2Store::platform()->getImagePath($item->getParams->get('image'));
             $image_alt = $item->getParams->get('image_alt');
@@ -76,7 +75,7 @@ if ($category_display_view === "grid_view") {
         <?php
         foreach ($list as $item) {
             ?>
-            <li class="<?php if ($_SERVER['PHP_SELF'] ==  Route::_(ContentHelperRoute::getArticleRoute($item->id))) echo 'active'; ?>">
+            <li class="<?php if ($_SERVER['PHP_SELF'] ==  Joomla\CMS\Router\Route::_(ContentHelperRoute::getArticleRoute($item->id))) echo 'active'; ?>">
                 <?php
                 $image = J2Store::platform()->getImagePath($item->getParams->get('image'));
                 $image_alt = $item->getParams->get('image_alt');
